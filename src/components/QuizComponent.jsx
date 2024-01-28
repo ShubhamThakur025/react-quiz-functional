@@ -4,13 +4,13 @@ import questions from '../questions.json'
 export default class QuizComponent extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             questionNo: 0,
             score: 0,
             attempted: 0
         }
     }
+    // to handle the accuracy and question numbers
     checkAns = (ans) => {
         if (questions[this.state.questionNo].answer === ans) {
             this.setState((prevState) => ({
@@ -20,7 +20,8 @@ export default class QuizComponent extends Component {
                 this.moveToNext()
             })
 
-        } else {
+        }
+        else {
             this.setState((prevState) => ({
                 attempted: prevState.attempted + 1
             }), () => {
@@ -30,7 +31,7 @@ export default class QuizComponent extends Component {
         }
     }
 
-
+    //to move to the next question
     moveToNext = () => {
         if (this.state.questionNo < questions.length - 1) {
             this.setState(prevState => ({
@@ -42,6 +43,7 @@ export default class QuizComponent extends Component {
         }
     }
 
+    //to move back to previous question
     moveToPrev = () => {
         if (this.state.questionNo < questions.length - 1) {
             this.setState(prevState => ({
@@ -49,6 +51,13 @@ export default class QuizComponent extends Component {
                 attempted: prevState.attempted - 1
             }))
         }
+    }
+
+    //to quit the game
+    checkOut = () =>{
+        let quit = window.confirm("Are you sure you want to quit ?")
+        if(quit){this.props.handleClick(this.state.score, this.state.attempted)}
+        else{return}
     }
     render() {
         const currentQuestion = questions[this.state.questionNo]
@@ -68,7 +77,7 @@ export default class QuizComponent extends Component {
                     <div className="btns">
                         <button id='prev-btn' disabled={this.state.questionNo === 0} onClick={() => this.moveToPrev()}>Previous</button>
                         <button id='next-btn' onClick={() => this.moveToNext()}>Next</button>
-                        <button id='quit-btn' onClick={() => this.checkAns("out")}>Quit</button>
+                        <button id='quit-btn' onClick={() => this.checkOut()}>Quit</button>
                     </div>
 
                 </div>

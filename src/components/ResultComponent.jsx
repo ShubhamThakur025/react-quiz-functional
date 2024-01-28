@@ -4,6 +4,7 @@ export default class ResultComponent extends Component {
     constructor(props) {
         super(props)
     }
+    // to give remarks based on score
     remarks = (percent) => {
         switch (true) {
             case percent <= 30:

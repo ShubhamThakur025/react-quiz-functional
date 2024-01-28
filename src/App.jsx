@@ -13,7 +13,7 @@ export default class App extends Component {
       attempted: 0
     }
   }
-
+  // to show handle the results
   showResults = (score, attempted) =>{
     this.setState({
       score : score,
@@ -24,6 +24,7 @@ export default class App extends Component {
     
   } 
 
+  // to handle the switching between pages
   switchPage = (pageName) =>{
     switch (pageName) {
       case "quiz":
